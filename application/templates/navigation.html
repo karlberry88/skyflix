@@ -1,0 +1,21 @@
+<!-- FROM navigation.html - CHANGE TO USE use url_for here-->
+<div class="container">
+  <div class="row">
+              <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
+      <header>
+    <h1 class="pt-5 pb-2">Generic site title here</h1>
+   <nav>
+    <a href="/">Home</a>
+    <a href="/register1">Form 1</a>
+    <a href="/register2">Form 2</a>
+  </nav>
+          {%  if user %}
+          <p>Hello {{ user }}</p>
+          {% else %}
+          <p>Not logged in</p>
+          {% endif %}
+</header>
+  </div>
+  </div>
+
+<!-- navigation.html ends here-->

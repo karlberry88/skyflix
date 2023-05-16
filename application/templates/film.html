@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+        <h1>{{title}}</h1>
+        <p>{{description}}</p>
+{% if record %}
+    <h2>There are {{ record|length }} fields in the Actors row returned.</h2>
+    <ul>
+        {% for field in record %}
+        <li> <em>{{ field }}</em>: {{record[field]}} </li>
+        {% endfor %}
+    </ul>
+<br><a href="{{ url_for('film_delete', id=record['film_id']) }}">(X) DELETE</a>
+{% else %}
+<h2>No records returned.</h2>
+{% endif %}
+
+{% endblock %}

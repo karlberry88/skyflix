@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'navigation.html' %}
+
+    <!-- Form to add new actor to the Actor table -->
+            <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
+<div class="row">
+        <h1 class="lead">{{title}}</h1>
+</div>
+<div class="row">
+        <p>{{description}}</p>
+</div>
+
+    {{ wtf.quick_form(form) }}
+            </div>
+{% endblock %}
+l>
