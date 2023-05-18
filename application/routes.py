@@ -32,7 +32,7 @@ def get_user_roles(user):
 # Section 2: HELPER FUNCTIONS e.g. DB connection code and methods
 def connect_db():
     return pymysql.connect(
-        user = 'root', password = '', database = 'skyflix',
+        user = 'root', password = 'password', database = 'skyflix',
         autocommit = True, charset = 'utf8mb4',
         cursorclass = pymysql.cursors.DictCursor)
 
@@ -60,7 +60,8 @@ def get_date():
 
 # Section 4: APPLICATION ROUTES (WEB PAGE DEFINITIONS)
 
-@app.route('/', methods = ['GET','POST'])
+@app.route('/home', methods = ['GET','POST'])
+@auth.login_required
 def home():
     """Landing page. Showing Films    """
     cursor = get_db().cursor()
@@ -70,7 +71,7 @@ def home():
     return render_template(
                 'home.html',
                 title="All Films",
-                description=f"Python, MySQL, Flask & Jinja. {get_date()}",
+                description=f"Blockbusters, Horror, Comedy, anything you want! {get_date()}",
                 records=result,
         user = auth.current_user()
     )
@@ -92,12 +93,11 @@ def register():
         if len(first_name) == 0 or len(last_name) == 0:
             error = "Please supply both first and last names."
         else:
-            return 'Thank you!'
+            return 'home.html'
 
     return render_template(
                 'form1.html',
-                title="Simple form!",
-                description=f"Using Flask with  a form on {get_date()}",
+                title="Choose Your Movies!",
                 form=form,
                 message=error,
     user = auth.current_user()
@@ -157,4 +157,16 @@ def actor_delete(id):
     app.logger.info(message)
     flash(message)
     return redirect(url_for('home'))
+
+@app.route('/', methods = ['GET','POST'])
+def landing():
+    """Landing page. Showing Films    """
+
+    return render_template(
+                'landing.html',
+                title="All Films",
+                description=f"Blockbusters, Horror, Comedy, anything you want! {get_date()}",
+
+        user = auth.current_user()
+    )
 

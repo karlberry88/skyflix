@@ -1,3 +1,5 @@
+{% extends 'layout.html' %}
+{% block content %}
 <!-- FROM navigation.html - CHANGE TO USE use url_for here-->
 <div class="container">
   <div class="row">
@@ -5,17 +7,18 @@
       <header>
     <h1 class="pt-5 pb-2">Sky Flix</h1>
    <nav>
-    <a href="/">Home</a>
-    <a href="/register1">Log In</a>
+
+    <a href="/home">Log In</a>
     <a href="/register2">Register</a>
   </nav>
           {%  if user %}
           <p>Hello {{ user }}</p>
-          {% else %}
-          <p>Not logged in</p>
+
+
           {% endif %}
 </header>
   </div>
   </div>
 
 <!-- navigation.html ends here-->
+    {% endblock %}
