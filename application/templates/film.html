@@ -10,7 +10,7 @@
         <li> <em>{{ field }}</em>: {{record[field]}} </li>
         {% endfor %}
     </ul>
-<br><a href="{{ url_for('film_delete', id=record['film_id']) }}">PURCHASE</a>
+<br><a href="{{ url_for('film_purchase', id=record['film_id']) }}">PURCHASE</a>
 {% else %}
 <h2>No records returned.</h2>
 {% endif %}

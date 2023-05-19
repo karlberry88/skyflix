@@ -145,15 +145,15 @@ def film_display(id):
                 record=result
     )
 
-@app.route('/actor/delete/<int:id>')
+@app.route('/film/purchase/<int:id>')
 @auth.login_required(role='admin')
-def film_delete(id):
+def film_purchase(id):
     """ Fourth route. Param for deleting from Actor table
     """
     app.logger.info(id)
     cursor = get_db().cursor()
     cursor.execute("DELETE FROM Film WHERE actor_id=%s ",id)
-    message=f"Deleted film id {id}"
+    message=f"Purchased film id {id}"
     app.logger.info(message)
     flash(message)
     return redirect(url_for('home'))
