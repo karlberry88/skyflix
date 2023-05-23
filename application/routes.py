@@ -65,7 +65,7 @@ def get_date():
 def home():
     """Landing page. Showing Films    """
     cursor = get_db().cursor()
-    cursor.execute("SELECT film_id, title, description, trailer from Film order by title desc ")
+    cursor.execute("SELECT film_id, title, description, genre, streams, age_rating, trailer from Film order by title desc ")
     result = cursor.fetchall()
     app.logger.info(result)
     return render_template(

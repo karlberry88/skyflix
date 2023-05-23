@@ -9,13 +9,16 @@
 {% if records %}
     <h2 class="lead">>There are {{ records|length }} records in the Films table!</h2>
     <table>
-        <tr><th>Film ID</th><th>Title</th><th>Description</th><<th>Trailer</th></tr>
+        <tr><th>Film ID</th><th>Title</th><<th>Description</th><th>Genre</th><th>Streams</th><th>Rating</th><th>Trailer</th></tr>
         {% for record in records %}
         <tr>
 
             <td><a href="{{ url_for('film_display',id=record['film_id']) }}">{{ record['film_id'] }}</a></td>
             <td>{{ record['title'] }} </td>
             <td>{{ record['description'] }} </td>
+            <td>{{ record['genre']}} </td>
+            <td>{{ record['streams']}} </td>
+            <td>{{ record['age_rating']}} </td>
             <td>{{ record['trailer']|safe}} </td>
 
         </tr>

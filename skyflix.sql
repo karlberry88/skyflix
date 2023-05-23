@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS `film`;
+filmDROP TABLE IF EXISTS `film`;
 
 CREATE TABLE `film` (
   `film_id` int NOT NULL,
