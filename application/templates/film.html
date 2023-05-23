@@ -1,15 +1,17 @@
 {% extends 'layout.html' %}
 {% block content %}
-
-        <h1>{{title}}</h1>
-        <p>{{description}}</p>
+<a href="/home">Home</a>
+<header>
+<img src="{{url_for('static',filename='logo.jpg' )}}" class="img-fluid"  width="500" height="600" align="center">
+</header>
 {% if record %}
-    <h2>There are {{ record|length }} fields in the Actors row returned.</h2>
+
     <ul>
         {% for field in record %}
-        <li> <em>{{ field }}</em>: {{record[field]}} </li>
+        <li> <em>{{ field }}</em>: {{record[field]|safe}} </li>
         {% endfor %}
     </ul>
+
 <br><a href="{{ url_for('film_purchase', id=record['film_id']) }}">PURCHASE</a>
 {% else %}
 <h2>No records returned.</h2>
