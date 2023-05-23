@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+    <a href="/">Home</a>
+    <title>Contact Form</title>
+   </head>
+<body>
+    <h3>Contact us</h3>
+    <label for="customer type">customer type</label>
+    <select id="customer type" name="customer type">
+      <option value="new">New</option>
+      <option value="Existng">Existing</option>
+          </select>
+    <label for="contact reason">Contact Reason</label>
+    <select id="contact reason" name="contact reason">
+      <option value="account">Account</option>
+      <option value="billing">Billing</option>
+      <option value="other">Other</option>
+    </select>
+    <form id="fcf-form-id" class="fcf-form-class" method="post" action="contact-form-process.php">
+            <label for="Name" class="fcf-label">Your name</label>
+            <div class="fcf-input-group">
+                <input type="text" id="Name" name="Name" class="fcf-form-control" required>
+            </div>
+        </form>
+        <div class="fcf-form-group">
+            <label for="Email" class="fcf-label">Your email address</label>
+            <div class="fcf-input-group">
+                <input type="email" id="Email" name="Email" class="fcf-form-control" required>
+            </div>
+        </div>
+        <div class="fcf-form-group">
+            <label for="Message" class="fcf-label">Your message</label>
+            <div class="fcf-input-group">
+                <textarea id="Message" name="Message" class="fcf-form-control" rows="6" maxlength="3000" required></textarea>
+            </div>
+        </div>
+        <div class="fcf-form-group">
+            <button type="submit" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Send</button>
+        </div>
+
+</body>
+</html>

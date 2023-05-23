@@ -32,7 +32,7 @@ def get_user_roles(user):
 # Section 2: HELPER FUNCTIONS e.g. DB connection code and methods
 def connect_db():
     return pymysql.connect(
-        user = 'root', password = 'password', database = 'skyflix',
+        user = 'root', password = '', database = 'skyflix',
         autocommit = True, charset = 'utf8mb4',
         cursorclass = pymysql.cursors.DictCursor)
 
@@ -115,7 +115,7 @@ def register2():
         app.logger.info(f" {first_name} {last_name} being added.")
         try:
             cursor = get_db().cursor()
-            sql = "INSERT INTO `actor` (first_name, last_name) VALUES (%s, %s)"
+            sql = "INSERT INTO `Customer` (firstname, lastname) VALUES (%s, %s)"
             app.logger.info(sql)
             cursor.execute(sql, (first_name.upper(), last_name.upper()))
             message = "Record successfully added"
@@ -148,12 +148,15 @@ def film_display(id):
 @app.route('/film/purchase/<int:id>')
 @auth.login_required(role='admin')
 def film_purchase(id):
-    """ Fourth route. Param for deleting from Actor table
+    """
     """
     app.logger.info(id)
     cursor = get_db().cursor()
-    cursor.execute("DELETE FROM Film WHERE actor_id=%s ",id)
-    message=f"Purchased film id {id}"
+    cursor.execute("UPDATE film SET streams = streams + 1 WHERE film_id=%s ",id)
+
+    cursor.execute(" select title from film WHERE film_id=%s ", id)
+    title=cursor.fetchone()
+    message=f"Purchased film title {title['title']}"
     app.logger.info(message)
     flash(message)
     return redirect(url_for('home'))
@@ -170,3 +173,15 @@ def landing():
         user = auth.current_user()
     )
 
+@app.route('/contact')
+
+def contact( ):
+    """"contact us page"""
+    return render_template(
+        'contact.html'
+    )
+@app.route('/')
+def logout_request():
+    logout(request)
+    messages.info(request,"Logged out successfully")
+    return redirect(url_for('home'))
