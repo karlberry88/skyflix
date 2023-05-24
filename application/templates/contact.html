@@ -1,9 +1,16 @@
 <!DOCTYPE html>
+<style>
+		body { background: #A2D4FF; }
+		header { background: #FF9BA2; }
+	</style>
+
 <head>
     <a href="/">Home</a>
     <title>Contact Form</title>
+     <center><img src="{{url_for('static',filename='logo.jpg')}}" class="img-fluid"   width="500" height="200"></center>
    </head>
 <body>
+<center>
     <h3>Contact us</h3>
     <label for="customer type">customer type</label>
     <select id="customer type" name="customer type">
@@ -37,6 +44,6 @@
         <div class="fcf-form-group">
             <button type="submit" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Send</button>
         </div>
-
+</center>
 </body>
 </html>

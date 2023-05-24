@@ -1,22 +1,26 @@
 <!-- FROM navigation.html - CHANGE TO USE use url_for here-->
-<div class="container">
-  <div class="row">
-              <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
-      <header>
-<img src="{{url_for('static',filename='logo.jpg' )}}" class="img-fluid"  width="500" height="600">
-    <h1 class="pt-5 pb-2">Sky Flix</h1>
    <nav>
+       <a href="/contact">Contact</a>
+       <a href="/">Log Out</a> <center>
     <a href="/">Home</a>
     <a href="/register1">Log In</a>
     <a href="/register2">Register</a>
-       <a href="/contact">Contact</a>
-       <a href="/">Log Out</a>
-  </nav>
+     </center>
+
+
+   </nav>
+<div class="container">
+  <div class="row">
+              <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
+      <header><center>
+<img src="{{url_for('static',filename='logo.jpg' )}}" class="img-fluid"  width="500" height="600">
+    <h1 class="pt50 pb40">Your Home Of Films</h1>
+</center>
           {%  if user %}
-          <p>Hello {{ user }}</p>
+          <center><b><p>Hello {{ user }}</p>
           {% else %}
           <p>Not logged in</p>
-          {% endif %}
+          {% endif %}</b></center>
 </header>
 
   {% with messages = get_flashed_messages() %}
@@ -31,4 +35,5 @@
   </div>
   </div>
 </div>
+
 <!-- navigation.html ends here-->

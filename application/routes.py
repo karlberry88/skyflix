@@ -58,14 +58,14 @@ def get_date():
     return today
 
 
-# Section 4: APPLICATION ROUTES (WEB PAGE DEFINITIONS)
+
 
 @app.route('/home', methods = ['GET','POST'])
 @auth.login_required
 def home():
     """Landing page. Showing Films    """
     cursor = get_db().cursor()
-    cursor.execute("SELECT film_id, title, description, genre, streams, age_rating, trailer from Film order by title desc ")
+    cursor.execute("SELECT film_id,title,description,genre,streams,age_rating, trailer from Film order by streams desc ")
     result = cursor.fetchall()
     app.logger.info(result)
     return render_template(
@@ -87,7 +87,7 @@ def register():
     if request.method == "POST":
         first_name = form.first_name.data
         last_name = form.last_name.data
-
+        email = form.email.data
         app.logger.info(f"We were given: {first_name} {last_name}")
 
         if len(first_name) == 0 or len(last_name) == 0:
@@ -112,12 +112,14 @@ def register2():
     if form.validate_on_submit():
         first_name = form.first_name.data
         last_name = form.last_name.data
-        app.logger.info(f" {first_name} {last_name} being added.")
+        email = form.email.data
+
+        app.logger.info(f" {first_name} {last_name} {email} being added.")
         try:
             cursor = get_db().cursor()
             sql = "INSERT INTO `Customer` (firstname, lastname) VALUES (%s, %s)"
             app.logger.info(sql)
-            cursor.execute(sql, (first_name.upper(), last_name.upper()))
+            cursor.execute(sql, (first_name.upper(), last_name.upper(), email))
             message = "Record successfully added"
             app.logger.info(message)
             flash(message)
