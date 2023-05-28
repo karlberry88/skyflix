@@ -6,29 +6,43 @@
             <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
                 <center>
               <b><h2 class="lead"style="color: red;">There are currently {{ records|length }} Films available and more being added WEEKLY!</h2>
-        <p>{{description}}</p></b></center>
-{% if records %}
+        <p>{{description}}</p></b>
+                    <p>{{get_date}}</p>
+                <button onclick="location.href='/register2'" type="button">
+         Register</button>
 
+                </center>
+{% if records %}
+<center>
     <table>
-        <tr><th>Film ID</th><th>Title</th><th>Description</th><th></th><th>Genre</th><th></th><th>Streams</th><th>-</th><th>Rating</th><th>-</th><th>Trailer</th></tr>
+        <tr><th>ID-</th><th>-Film</th><th>-</th><th>Genre</th><th>-</th><th>-</th><th>Rating-</th><th></th><th>Trailer-</th><th></th><th>Streams</th></tr>
         {% for record in records %}
         <tr>
 
             <td><a href="{{ url_for('film_display',id=record['film_id']) }}">{{ record['film_id'] }}</a></td>
-            <b><td>{{ record['title'] }} </td></b>
-            <td>{{ record['description'] }} </td>
+           <td>- </td><td>{{ record['title'] }} </td>
+
             <td></td>
-            <td>{{ record['genre']}} </td>
-            <td></td><td>{{ record['streams']}} </td>
-            <td></td><td>{{ record['age_rating']}} </td>
+            <td>-</td><td>{{ record['genre']}} </td>
+
+            <td>-</td><td>{{ record['age_rating']}} </td>
            <td></td> <td>{{ record['trailer']|safe}} </td>
+            <td>-</td><td>{{ record['streams']}} </td>
+
+
 
 
         </tr>
         {% endfor %}
-    </table>
+    </table>  <br><br><br><br><br> <br><br><br><br><br>
+</center>
 {% else %}
 <h2>No records returned.</h2>
-{% endif %}
+{% endif %}<center><a href="/contact">Contact Us</a>  </center>
+                <a href="/ts&cs">Terms Of Use</a>
+
+
+                <br><br> <br><br><br><br><br>
 	<!-- home.html ends here-->
 {% endblock %}
+            </div>

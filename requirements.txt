@@ -4,3 +4,4 @@ Flask-WTF
 cryptography
 flask-HTTPAuth
 Flask-Bootstrap4
+email_validator

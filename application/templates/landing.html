@@ -1,28 +1,39 @@
 {% extends 'layout.html' %}
 {% block content %}
-<!-- FROM navigation.html - CHANGE TO USE use url_for here-->
+
 <div class="container">
   <div class="row">
               <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
       <header>
          <center><img src="{{url_for('static',filename='logo.jpg')}}" class="img-fluid"   width="500" height="200"></center>
-
+</header>
+                  <body>
    <nav>
         <center>
-    <a href="/home">Log In</a>
-    <a href="/register2">Register</a>
-       <br> <br> <br>
-       <a href="/contact">Contact Us</a>
+
+            <button onclick="location.href='/home'" type="button">
+         Log In</button><br>
+        <button onclick="location.href='/register2'" type="button">
+         Register</button><br>
+                   <br><br><br><br><br>
+            <button onclick="location.href='/contact'" type="button">
+         Contact Us</button><br>
+
+
         </center>
-  </nav>
+   </nav>
+                  </body>
+
           {%  if user %}
           <p>Hello {{ user }}</p>
 
 
           {% endif %}
-</header>
+
   </div>
   </div>
+</div>
+<a href="/ts&cs">Terms Of Use</a>
 
 <!-- navigation.html ends here-->
     {% endblock %}

@@ -1,11 +1,16 @@
 <!-- FROM navigation.html - CHANGE TO USE use url_for here-->
    <nav>
-       <a href="/contact">Contact</a>
-       <a href="/">Log Out</a> <center>
-    <a href="/">Home</a>
-    <a href="/register1">Log In</a>
-    <a href="/register2">Register</a>
-     </center>
+       <button onclick="location.href='/'" type="button">
+         Log Out</button><br><center>
+
+       <button onclick="location.href='/home'" type="button">
+         Home</button><br> </center>
+
+            <a HREF="https://www.imdb.com"> IMDB<a/><br>
+                <a HREF="https://www.rottentomatoes.com/"> Rotten Tomatoes<a/>
+
+
+
 
 
    </nav>
@@ -14,7 +19,7 @@
               <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
       <header><center>
 <img src="{{url_for('static',filename='logo.jpg' )}}" class="img-fluid"  width="500" height="600">
-    <h1 class="pt50 pb40">Your Home Of Films</h1>
+    <h1 class="pt50 pb40">Your Home Of Films!</h1>
 </center>
           {%  if user %}
           <center><b><p>Hello {{ user }}</p>
@@ -35,5 +40,6 @@
   </div>
   </div>
 </div>
+
 
 <!-- navigation.html ends here-->

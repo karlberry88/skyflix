@@ -4,17 +4,27 @@ from flask import render_template, request, g, flash,redirect, url_for
 import pymysql
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
-### HTTP Authorisation
 auth = HTTPBasicAuth()
 
 users = {
-	"admin": generate_password_hash("admin"),
-	"eoghan": generate_password_hash("password")
+    "admin": generate_password_hash("admin"),
+    "susan": generate_password_hash("password"),
+    "alamin": generate_password_hash("password"),
+    "karl": generate_password_hash("password"),
+    "mike": generate_password_hash("password"),
+    "david": generate_password_hash("password"),
+    "neil": generate_password_hash("password")
 }
 roles = {
-	"admin": ['admin'],
-	"eoghan": []
+    "admin": ['admin'],
+    "susan": ['admin'],
+    "alamin": ['admin'],
+    "karl": ['admin'],
+    "mike": ['admin'],
+    "david": ['admin'],
+    "neil": ['admin']
 }
 @auth.verify_password
 def verify_password(username, password):
@@ -51,11 +61,13 @@ def close_db(error):
 
 # Helper methods
 def get_date():
-    """ Function to return (fake) date - TASK: Update this - Add the code to pass the current date to the home 	HTML template.
-    """
-    today = "Today"
-    app.logger.info(f"In get_date function! Update so it returns the correct date! {today}")
+
+    now = datetime.now()
+    today = now.strftime("%d/%m/%Y %H:%M:%S")
+    app.logger.info({today})
     return today
+
+
 
 
 
@@ -71,39 +83,11 @@ def home():
     return render_template(
                 'home.html',
                 title="All Films",
-                description=f"Blockbusters, Horror, Comedy, anything you want! {get_date()}",
+                description=f"Blockbusters, Horror, Comedy, anything you want!  \n {get_date()}",
                 records=result,
         user = auth.current_user()
     )
-@app.route('/register1', methods = ['GET','POST'])
-@auth.login_required
-def register():
-    """ Basic form.
-    """
-    error = ""
-    form = BasicForm() # create form instance
-
-    # if page is loaded as a post i.e. user has submitted the form
-    if request.method == "POST":
-        first_name = form.first_name.data
-        last_name = form.last_name.data
-        email = form.email.data
-        app.logger.info(f"We were given: {first_name} {last_name}")
-
-        if len(first_name) == 0 or len(last_name) == 0:
-            error = "Please supply both first and last names."
-        else:
-            return 'home.html'
-
-    return render_template(
-                'form1.html',
-                title="Choose Your Movies!",
-                form=form,
-                message=error,
-    user = auth.current_user()
-    )
 @app.route('/register2',  methods = ['GET','POST'])
-@auth.login_required(role='admin')
 def register2():
     """ Second form.
     """
@@ -113,21 +97,24 @@ def register2():
         first_name = form.first_name.data
         last_name = form.last_name.data
         email = form.email.data
+        address = form.address.data
+        phone_number = form.phone_number.data
+
 
         app.logger.info(f" {first_name} {last_name} {email} being added.")
         try:
             cursor = get_db().cursor()
-            sql = "INSERT INTO `Customer` (firstname, lastname) VALUES (%s, %s)"
+            sql = "INSERT INTO `Customer` (firstname, lastname, email, address, phone) VALUES (%s, %s, %s, %s, %s)"
             app.logger.info(sql)
-            cursor.execute(sql, (first_name.upper(), last_name.upper(), email))
-            message = "Record successfully added"
+            cursor.execute(sql, (first_name.upper(), last_name.upper(), email.upper(), address.upper(), phone_number.upper()))
+            message = f"Welcome To  SkyFlix!!"
             app.logger.info(message)
             flash(message)
             return redirect(url_for('home'))
         except Exception as e:
             message = f"error in insert operation: {e}"
             flash(message)
-    return render_template('form1.html', message=message, form=form, title='Form Test 2 - Add', description='DB test', user = auth.current_user()
+    return render_template('form1.html', message=message, form=form, title='Create a SkyFlix Account', description='Sign up', user=auth.current_user()
 )
 
 
@@ -158,7 +145,7 @@ def film_purchase(id):
 
     cursor.execute(" select title from film WHERE film_id=%s ", id)
     title=cursor.fetchone()
-    message=f"Purchased film title {title['title']}"
+    message=f"Thank you for Purchasing  {title['title']}"
     app.logger.info(message)
     flash(message)
     return redirect(url_for('home'))
@@ -182,8 +169,14 @@ def contact( ):
     return render_template(
         'contact.html'
     )
-@app.route('/')
-def logout_request():
-    logout(request)
-    messages.info(request,"Logged out successfully")
-    return redirect(url_for('home'))
+
+
+@app.route('/ts&cs', methods = ['GET','POST'])
+def terms_of_use():
+    """Landing page. Showing Films    """
+
+    return render_template(
+                'ts&cs.html',
+
+
+    )
